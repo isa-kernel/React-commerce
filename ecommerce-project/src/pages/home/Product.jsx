@@ -4,13 +4,30 @@ import { formatMoney } from "../../utils/money";
 
 export function Product({product, loadCart}) {
   const [quantity, setQuantity] = useState(1);
-  const addToCart = async () => {
+  const[showAdded,setShowAdded] = useState(false);
+ const addToCart = async () => {
           await axios.post('/api/cart-items', {
             productId: product.id,
             quantity
           });
           await loadCart();
         };
+
+        
+
+const handleAddToCart = async () => {
+    try {
+      await addToCart();   // ✅ wait for API
+
+      setShowAdded(true);
+
+      setTimeout(() => {
+        setShowAdded(false);
+      }, 1000);
+    } catch (error) {
+      console.error("Failed to add to cart", error);
+    }
+};
 
   return (
     <div className="product-container">
@@ -39,7 +56,6 @@ export function Product({product, loadCart}) {
         <select value={quantity} onChange={(event) => {
           const quantitySelected = Number(event.target.value);
           setQuantity(quantitySelected);
-          console.log(quantitySelected);
         }}>
           <option value="1">1</option>
           <option value="2">2</option>
@@ -56,13 +72,13 @@ export function Product({product, loadCart}) {
 
       <div className="product-spacer"></div>
 
-      <div className="added-to-cart">
+      <div className={`added-to-cart ${showAdded ? "added-to-cart-display" : ""}`}>
         <img src="images/icons/checkmark.png" />
         Added
       </div>
 
       <button className="add-to-cart-button button-primary"
-        onClick={addToCart}>
+        onClick={handleAddToCart}>
         Add to Cart
       </button>
     </div>

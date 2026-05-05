@@ -25,13 +25,26 @@ useEffect(() => {
   loadCart();
 }, []);
 
+  const [products, setProducts] = useState([]);
+
+
+  useEffect( () => {
+    const getHomeData = async () => {
+    const response = await  axios.get('/api/products');
+      setProducts(response.data);
+    };
+
+    getHomeData();
+
+  },[]);
+
 
 
   return (
     <Routes>
-      <Route index element={<HomePage cart={cart} loadCart={loadCart} />} />
+      <Route index element={<HomePage cart={cart} loadCart={loadCart} products={products} />} />
       <Route path="checkout" element={<CheckoutPage cart={cart} loadCart={loadCart} />} />
-      <Route path="Orders" element={<OrdersPage cart={cart} />} />
+      <Route path="Orders" element={<OrdersPage cart={cart}  loadCart={loadCart} />} />
       <Route path="Tracking" element={<TrackingPage cart={cart} />} />
     </Routes>
   )
