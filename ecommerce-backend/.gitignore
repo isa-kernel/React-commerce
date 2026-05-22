@@ -3,3 +3,7 @@ database.sqlite
 *.zip
 dist
 .DS_Store
+
+.env
+dist/
+build/
