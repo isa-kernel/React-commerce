@@ -163,3 +163,8 @@
   height: 34px;
   margin-top: 1px;
 }
+.home-page .products-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+  gap: 10px;
+}
