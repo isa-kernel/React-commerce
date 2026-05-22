@@ -5,7 +5,8 @@ import { CheckoutPage } from './pages/checkout/checkoutPage'
 import { OrdersPage } from './pages/orders/orders'
 import { TrackingPage } from './pages/tracking/TrackingPage'
 import './App.css'
-import axios from 'axios'
+// import axios from 'axios'
+import API from './api/api'
 
 
 
@@ -14,7 +15,7 @@ function App() {
 
 const loadCart = async () => {
   try {
-    const response = await axios.get('/api/cart-items?expand=product');
+    const response = await API.get('/cart-items?expand=product');
     setCart(response.data);
   } catch (error) {
     console.error(error);
@@ -30,7 +31,7 @@ useEffect(() => {
 
   useEffect( () => {
     const getHomeData = async () => {
-    const response = await  axios.get('/api/products');
+    const response = await  API.get('/products');
       setProducts(response.data);
     };
 

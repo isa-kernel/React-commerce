@@ -1,17 +1,18 @@
-import axios from 'axios';
+// import axios from 'axios';
 import dayjs from 'dayjs';
 import { useState, useEffect, Fragment } from 'react';
 import { Link } from 'react-router';
 import { Header } from '../../components/Header';
 import './OrdersPage.css'
 import { formatMoney } from '../../utils/money';
+import API from '../../api/api';
 
 export function OrdersPage({ cart, loadCart }) {
   const [ orders, setOrders ] = useState([]);
 
   useEffect(() => {
     const fetchOrdersPageData = async () => {
-    const response = await axios.get('/api/orders?expand=products')
+    const response = await API.get('/orders?expand=products')
         setOrders(response.data);
     }
     fetchOrdersPageData();
@@ -53,7 +54,7 @@ export function OrdersPage({ cart, loadCart }) {
                   {order.products.map((orderProduct) => {
 
                        const addToCart = async () => {
-          await axios.post('/api/cart-items', {
+          await API.post('/cart-items', {
             productId: orderProduct.product.id,
             quantity: 1
           });
