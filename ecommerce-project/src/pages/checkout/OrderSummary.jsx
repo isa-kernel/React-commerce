@@ -12,7 +12,7 @@ export function OrderSummary({cart, deliveryOptions, loadCart}) {
           return deliveryOption.id === cartItem.deliveryOptionId;
         });
         const deleteCartItem = async () => {
-        await  API.delete(`/cart-items/${cartItem.productId}`);
+        await  API.delete(`/api/cart-items/${cartItem.productId}`);
         await loadCart();
         };
 

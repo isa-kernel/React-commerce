@@ -12,7 +12,7 @@ export function OrdersPage({ cart, loadCart }) {
 
   useEffect(() => {
     const fetchOrdersPageData = async () => {
-    const response = await API.get('/orders?expand=products')
+    const response = await API.get('/api/orders?expand=products')
         setOrders(response.data);
     }
     fetchOrdersPageData();
@@ -54,7 +54,7 @@ export function OrdersPage({ cart, loadCart }) {
                   {order.products.map((orderProduct) => {
 
                        const addToCart = async () => {
-          await API.post('/cart-items', {
+          await API.post('/api/cart-items', {
             productId: orderProduct.product.id,
             quantity: 1
           });

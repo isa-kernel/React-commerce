@@ -7,7 +7,7 @@ export function PaymentSummary({paymentSummary, loadCart}) {
   const navigate = useNavigate();
 
   const createOrder = async () => {
-    await API.post('/orders');
+    await API.post('/api/orders');
     await loadCart();
     navigate('/orders');
   };

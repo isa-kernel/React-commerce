@@ -31,7 +31,7 @@ useEffect(() => {
 
   useEffect( () => {
     const getHomeData = async () => {
-    const response = await  API.get('/products');
+    const response = await  API.get('/api/products');
       setProducts(response.data);
     };
 

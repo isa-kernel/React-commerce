@@ -14,7 +14,7 @@ export function CheckoutPage({ cart ,loadCart }) {
   useEffect(() => {
 
     const fetchCheckoutPageData = async () => {
-     let response = await API.get('/delivery-options?expand=estimatedDeliveryTime');
+     let response = await API.get('/api/delivery-options?expand=estimatedDeliveryTime');
         setDeliveryOptions(response.data);
     };
 
@@ -24,7 +24,7 @@ export function CheckoutPage({ cart ,loadCart }) {
     useEffect(() => {
 
       const fetchCheckoutPaymentPageData = async () => {
-      let response = await API.get('/payment-summary');
+      let response = await API.get('/api/payment-summary');
         setPaymentSummary(response.data);
     };
 
